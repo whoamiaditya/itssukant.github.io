@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Times New Roman";
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.logo {
+  height: 400px;
+  width: 450px;
+}
+.home {
+  width: 250px;
+  height: 75px;
+  position: absolute;
+  margin-left: -700px;
+  margin-top: -250px;
+  border-radius: 15px;
+  border-color: red;
+}
+.home:hover {
+  transform: scale(1.25);
+  color: white;
+  background-color: tomato;
+}
+.btn {
+  width: 250px;
+  height: 75px;
+  position: absolute;
+  border-radius: 15px;
+  margin-top: -250px;
+  margin-left: 450px;
+  box-shadow: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border-color: red;
+}
+.btn:hover {
+  transform: scale(1.25);
+  color: white;
+  background-color: tomato;
+}
+table {
+  width: 1250px;
+  box-shadow: -1px 12px 12px -6px rgba(0, 0, 0, 0.5);
+}
+table,
+td,
+th {
+  padding: 20px;
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+  text-align: center;
+  cursor: pointer;
+}
+td {
+  font-size: 18px;
+}
+th {
+  background-color: red;
+  color: white;
+}
+tr:nth-child(odd) {
+  background-color: rgba(255, 177, 177, 0.5);
+}
+tr:nth-child(odd):hover {
+  background-color: rgb(255, 43, 43);
+  color: white;
+  transform: scale(1.25);
+  transition: transform 300ms ease-in;
+}
+tr:nth-child(even) {
+  background-color: #ededed;
+}
+tr:nth-child(even):hover {
+  background-color: lightgray;
+  transform: scale(1.25);
+  transition: transform 300ms ease-in;
+}

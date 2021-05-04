@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <style>
+        .abc {
+            display: block;
+            margin: auto;
+
+        }
+    </style>
+
+
+    <title>seCUREME-Ambulance</title>
+</head>
+
+<body>
+    <section id="home">
+
+
+
+
+
+        <img src="1.jpeg" class="img-fluid abc" alt="image">
+
+
+
+<div>
+
+</div>
+        
+
+
+        <div class="text-center">
+            <a type="button" class="btn btn-dark" href="./index.html">Home</a>
+
+            <a type="button" class="btn btn-dark" href="./blog.html">Blog</a>
+            <a type="button" class="btn btn-dark" href="./volunteer.html">Our Volunteers</a>
+            <a type="button" class="btn btn-dark" href="./doctor.html">Our Doctor Volunteers</a>
+        </div>
+
+<div>
+<p>
+    <h3 style="text-align: center;color: #ff7171;">Ambulance</h3>
+</p>
+</div>
+
+        <input type="text" name=" " id="myInput" placeholder="enter your state..." style="width:70%; margin-left:15%; margin-right:15%;" onkeyup="searchFun()">
+        <div style="height: 20px;"></div>
+ 
+        
+ 
+ 
+ <div class="table-responsive">
+         <table class="table table-bordered  table-hover" style="text-align:center;font-family:tahoma;width:70%; 
+         margin-left:15%; 
+         margin-right:15%;" id="myTable">
+             <thead>
+               <th>sno</th>
+               <th>Name</th>
+               <th>Contact</th>
+               <th>Status</th>
+               <th>Time of Verification</th>
+               <th>Additional Info</th>
+               <th>City</th>
+               <th>State</th>
+       
+             </thead>
+             <tbody id="tbody1">
+                
+             </tbody>
+           </table>
+        </div>
+ 
+           <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script> 
+ <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries --> -->
+ <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+ 
+ <script id="MainScript">
+ 
+ 
+ 
+ 
+ 
+     // Your web app's Firebase configuration
+     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCqZbqsdKZqXEFDVtH8s__1ePkX0YJJDQ0",
+  authDomain: "meambulance-95140.firebaseapp.com",
+  databaseURL: "https://meambulance-95140-default-rtdb.firebaseio.com",
+  projectId: "meambulance-95140",
+  storageBucket: "meambulance-95140.appspot.com",
+  messagingSenderId: "178648672480",
+  appId: "1:178648672480:web:a9e321023dc96634668885",
+  measurementId: "G-TFYRJHGCLQ"
+};
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+     firebase.analytics(); 
+   
+     function SelectAllData(){
+         firebase.database().ref('/1VqErzquDe2Zqb_mL3NUuJ48XvOWVS5ox0QKxZyN3N3Q').child("Sheet1").once('value',
+         function(AllRecords){
+         AllRecords.forEach(
+             function(CurrentRecord){
+                 var NAME=CurrentRecord.val().NAME;
+                 var CONTACT_NUMBER=CurrentRecord.val().CONTACT_NUMBER;
+                 var Status=CurrentRecord.val().Status;
+                 var Timestamp=CurrentRecord.val().Timestamp;
+                 var ADDITIONAL_INFO=CurrentRecord.val().ADDITIONAL_INFO;
+                 var City=CurrentRecord.val().City;
+                 var State=CurrentRecord.val().State;
+
+
+
+                 var Status=CurrentRecord.val().Status;
+                 AddItemsToTable(NAME,CONTACT_NUMBER,Status,Timestamp,ADDITIONAL_INFO,City,State);
+   
+             }
+         );});
+     }
+   
+     window.onload=SelectAllData;
+   
+   
+   
+     var stdno=0;
+     function AddItemsToTable(NAME,CONTACT_NUMBER,Status,Timestamp,ADDITIONAL_INFO,City,State){
+       var tbody=document.getElementById('tbody1');
+       var trow=document.createElement('tr');
+       var td1=document.createElement('td');
+       var td2=document.createElement('td');
+       var td3=document.createElement('td');
+       var td4=document.createElement('td');
+       var td5=document.createElement('td');
+       var td6=document.createElement('td');
+       var td8=document.createElement('td');
+
+
+       var td7=document.createElement('td');
+
+   
+       td1.innerHTML=++stdno;
+       td2.innerHTML=NAME;
+   
+       td3.innerHTML=CONTACT_NUMBER;
+       td4.innerHTML=Status;
+       td5.innerHTML=Timestamp;
+
+       td6.innerHTML=ADDITIONAL_INFO;
+       td7.innerHTML=City;
+       td8.innerHTML=State;
+
+   
+       trow.appendChild(td1);
+       trow.appendChild(td2);
+   
+       trow.appendChild(td3);
+       trow.appendChild(td4);
+       trow.appendChild(td5);
+
+       trow.appendChild(td6);
+       trow.appendChild(td7);
+       trow.appendChild(td8);
+
+   
+       tbody.appendChild(trow);
+   
+   
+   
+     }
+   
+   
+   
+   
+   
+   
+       </script>
+       <script>
+         const searchFun=()=>{
+             let filter=document.getElementById('myInput').value.toUpperCase();
+             let myTable=document.getElementById('myTable');
+             let tr=myTable.getElementsByTagName('tr');
+             for(var i=0;i<tr.length;i++){
+                 let td= tr[i].getElementsByTagName('td')[7];
+                 if(td){
+                     let textvalue=td.textContent || td.innerHTML;
+                     if(textvalue.toUpperCase().indexOf(filter)>-1){
+                         tr[i].style.display="";
+                     }else{
+                         tr[i].style.display="none";
+                     }
+                 }
+             }
+         }
+      </script>
+ 
+
+
+        <script>
+            function refreshPage() {
+                window.location.reload();
+            }
+
+
+        </script>
+
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+            crossorigin="anonymous"></script>
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+
+
+        <!--Begin Comm100 Live Chat Code-->
+        <div id="comm100-button-20cc9acd-0aa9-4412-82d8-04af08a049c7"></div>
+        <script type="text/javascript">
+            var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: "20cc9acd-0aa9-4412-82d8-04af08a049c7", div_id: "comm100-button-20cc9acd-0aa9-4412-82d8-04af08a049c7" }), t.site_id = 40100163, t.main_code_plan = "20cc9acd-0aa9-4412-82d8-04af08a049c7", e("https://vue.comm100.com/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://standby.comm100vue.com/livechat.ashx?siteId=") }, 5e3) })(Comm100API || {})
+        </script>
+        <!--End Comm100 Live Chat Code-->
+
+    </section>
+
+
+   
+</body>
+
+</html>

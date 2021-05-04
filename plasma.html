@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <style>
+        .abc {
+            display: block;
+            margin: auto;
+
+        }
+    </style>
+
+
+    <title>seCUREME-Plasma</title>
+</head>
+
+<body>
+    <section id="home">
+
+
+
+
+
+        <img src="1.jpeg" class="img-fluid abc" alt="image">
+
+
+
+
+
+        <div class="text-center">
+            <a type="button" class="btn btn-dark" href="./index.html">Home</a>
+
+            <a type="button" class="btn btn-dark" href="./blog.html">Blog</a>
+            <a type="button" class="btn btn-dark" href="./volunteer.html">Our Volunteers</a>
+            <a type="button" class="btn btn-dark" href="./doctor.html">Our Doctor Volunteers</a>
+        </div>
+
+<div>
+<p style="align-items: center;">
+    <h3 style="text-align: center;color: #ff7171;">Plasma</h3>
+</p>
+</div>
+
+ 
+        
+ 
+ 
+ 
+
+        <input type="text" name=" " id="myInput" placeholder="enter your location..." style="width:80%; margin-left:10%; margin-right:10%;" onkeyup="searchFun()">
+        <div style="height: 20px;"></div>
+ 
+        
+ 
+ 
+ <div class="table-responsive">
+         <table class="table table-bordered  table-hover" style="text-align:center;font-family:tahoma;width:80%; 
+         margin-left:10%; 
+         margin-right:10%;" id="myTable">
+             <thead>
+               <th>sno</th>
+               <th>Name of Source</th>
+               <th>Availibility Link</th>
+               <th>Contact</th>
+               <th>Special Notes</th>
+               <th>Time of Verification</th>
+               <th>Location</th>
+               
+       
+             </thead>
+             <tbody id="tbody1">
+                
+             </tbody>
+           </table>
+        </div>
+    </div>
+ 
+           <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script> 
+
+ <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+ 
+ <script id="MainScript">
+ 
+ 
+ 
+ 
+ 
+     
+const firebaseConfig = {
+  apiKey: "AIzaSyAxMIkfvHIuJCAiNc5Q7EDD0RSV-1sEcW0",
+  authDomain: "meplasma-6e195.firebaseapp.com",
+  databaseURL: "https://meplasma-6e195-default-rtdb.firebaseio.com",
+  projectId: "meplasma-6e195",
+  storageBucket: "meplasma-6e195.appspot.com",
+  messagingSenderId: "756923968923",
+  appId: "1:756923968923:web:03617ff4f7b89c9011453e",
+  measurementId: "G-GQVK4BMDDF"
+};
+    
+     firebase.initializeApp(firebaseConfig);
+     firebase.analytics(); 
+   
+     function SelectAllData(){
+         firebase.database().ref('/162HpsLZDA7PUBBB4pHkO011C5F8FI0pXnV5QRaxaoYs').child("Sheet1").once('value',
+         function(AllRecords){
+         AllRecords.forEach(
+             function(CurrentRecord){
+                 var Location=CurrentRecord.val().LOCATION;
+                 var AVAILIBILITY_LINK=CurrentRecord.val().AVAILIBILITY_LINK;
+                 var CONTACT_NUMBER=CurrentRecord.val().CONTACT_NUMBER;
+                 var Additional_Info=CurrentRecord.val().Additional_Info;
+                 var Name=CurrentRecord.val().NAME;
+                 var Timestamp=CurrentRecord.val().Timestamp;
+
+
+
+                 AddItemsToTable(Location,AVAILIBILITY_LINK,CONTACT_NUMBER,Additional_Info,Name,Timestamp);
+   
+             }
+         );});
+     }
+   
+     window.onload=SelectAllData;
+   
+   
+   
+     var stdno=0;
+     function AddItemsToTable(Location,AVAILIBILITY_LINK,CONTACT_NUMBER,Additional_Info,Name,Timestamp){
+       var tbody=document.getElementById('tbody1');
+       var trow=document.createElement('tr');
+       var td1=document.createElement('td');
+       var td2=document.createElement('td');
+       var td3=document.createElement('td');
+       var td4=document.createElement('td');
+       var td5=document.createElement('td');
+       var td6=document.createElement('td');
+       var td7=document.createElement('td');
+
+
+
+   
+       td1.innerHTML=++stdno;
+       td2.innerHTML=Name;
+   
+       td3.innerHTML=AVAILIBILITY_LINK;
+       td4.innerHTML=CONTACT_NUMBER;
+       td5.innerHTML=Additional_Info;
+
+       td6.innerHTML=Timestamp;
+       td7.innerHTML=Location;
+
+   
+       trow.appendChild(td1);
+       trow.appendChild(td2);
+   
+       trow.appendChild(td3);
+       trow.appendChild(td4);
+       trow.appendChild(td5);
+
+       trow.appendChild(td6);
+       trow.appendChild(td7);
+
+   
+       tbody.appendChild(trow);
+   
+   
+   
+     }
+   
+   
+   
+   
+   
+   
+       </script>
+       <script>
+         const searchFun=()=>{
+             let filter=document.getElementById('myInput').value.toUpperCase();
+             let myTable=document.getElementById('myTable');
+             let tr=myTable.getElementsByTagName('tr');
+             for(var i=0;i<tr.length;i++){
+                 let td= tr[i].getElementsByTagName('td')[6];
+                 if(td){
+                     let textvalue=td.textContent || td.innerHTML;
+                     if(textvalue.toUpperCase().indexOf(filter)>-1){
+                         tr[i].style.display="";
+                     }else{
+                         tr[i].style.display="none";
+                     }
+                 }
+             }
+         }
+      </script>
+ 
+
+
+        <script>
+            function refreshPage() {
+                window.location.reload();
+            }
+
+
+        </script>
+
+
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+            crossorigin="anonymous"></script>
+
+        
+        <div id="comm100-button-20cc9acd-0aa9-4412-82d8-04af08a049c7"></div>
+        <script type="text/javascript">
+            var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: "20cc9acd-0aa9-4412-82d8-04af08a049c7", div_id: "comm100-button-20cc9acd-0aa9-4412-82d8-04af08a049c7" }), t.site_id = 40100163, t.main_code_plan = "20cc9acd-0aa9-4412-82d8-04af08a049c7", e("https://vue.comm100.com/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://standby.comm100vue.com/livechat.ashx?siteId=") }, 5e3) })(Comm100API || {})
+        </script>
+        
+
+    </section>
+
+
+   
+</body>
+
+</html>
