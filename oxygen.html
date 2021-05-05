@@ -17,6 +17,32 @@
 
         }
     </style>
+    <style>
+        #loader {
+            border: 12px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #e65959;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .center {
+            position: relative;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 30px;
+            margin: auto;
+        }
+    </style>
+
 
 
     <title>seCUREME-Oxygen</title>
@@ -36,11 +62,12 @@
 
 
         <div class="text-center">
-            <a type="button" class="btn btn-dark" href="./index.html">Home</a>
+            <a type="button" class="btn btn-dark" style="margin: 3px;"href="./index.html">Home</a>
 
-            <a type="button" class="btn btn-dark" href="./blog.html">Blog</a>
-            <a type="button" class="btn btn-dark" href="./volunteer.html">Our Volunteers</a>
-            <a type="button" class="btn btn-dark" href="./doctor.html">Our Doctor Volunteers</a>
+            <a type="button" class="btn btn-dark" style="margin: 3px;"href="./blog.html">Blog</a>
+            <a type="button" class="btn btn-dark" style="margin: 3px;"href="./volunteer.html">Our Volunteers</a>
+            <a type="button" style="margin: 3px;" class="btn btn-dark" href="./team.html">Our Team</a>
+            <a type="button" style="margin: 3px;" class="btn btn-dark" href="./doc.html">Our Warriors</a>
         </div>
 
 <div>
@@ -56,15 +83,13 @@
  
  
 
-        <input type="text" name=" " id="myInput" placeholder="enter your state..." style="width:80%; margin-left:10%; margin-right:10%;" onkeyup="searchFun()">
+        <input type="text" name=" " id="myInput" placeholder="enter your state..." style="width:90%; margin-left:5%; margin-right:5%;" onkeyup="searchFun()">
         <div style="height: 20px;"></div>
  
         
  
  
- <div class="table-responsive"style="width:80%; 
- margin-left:10%; 
- margin-right:10%;">
+ <div class="table-responsive"style="width:90%; margin-left:5%; margin-right:5%;">
          <table class="table table-bordered  table-hover" style="text-align:center;font-family:tahoma;" id="myTable">
              <thead>
                <th>sno</th>
@@ -82,6 +107,9 @@
        
              </thead>
              <tbody id="tbody1">
+                <th colspan=10 style="padding-left: 48%;">
+                    <p class="loader1" id="loader" class="center"style="align-items: center;"></p>
+                </th>
                 
              </tbody>
            </table>
@@ -121,8 +149,10 @@ const firebaseConfig = {
      function SelectAllData(){
          firebase.database().ref('/1DN6LSaFPqtmdPSKpLuTUnqo6AiQrUwjJpx8wuyrnLQo').child("Sheet1").once('value',
          function(AllRecords){
+            document.getElementById("tbody1").innerHTML = "";
          AllRecords.forEach(
              function(CurrentRecord){
+
                  var location=CurrentRecord.val().LOCATION_OR_CITY;
                  var status=CurrentRecord.val().STATUS;
                  var phone=CurrentRecord.val().CONTACT_NUMBER;

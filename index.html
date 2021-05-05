@@ -17,6 +17,32 @@
 
         }
     </style>
+    <style>
+        #loader {
+            border: 12px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #e65959;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .center {
+            position: relative;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 30px;
+            margin: auto;
+        }
+    </style>
+
 
 
     <title>seCUREME</title>
@@ -37,28 +63,29 @@
         <div style="text-align:center"  class="accordion-flush">
             <p>
 
-                <a class="btn btn-outline-primary"  href="./hospitalbed.html" 
+                <a class="btn btn-outline-primary" style="margin: 5px;" href="./hospitalbed.html" 
                     >
                     Hospital Bed
                 </a>
-                <a class="btn btn-outline-secondary"  href="./plasma.html" >
+                <a class="btn btn-outline-secondary" style="margin: 5px;"  href="./plasma.html" >
                     Plasma
                 </a>
-                <a class="btn btn-outline-success"  href="./oxygen.html" >
+                <a class="btn btn-outline-success" style="margin: 5px;"  href="./oxygen.html" >
                     Oxygen
                 </a>
-                <a class="btn btn-outline-danger"  href="./medicine.html" >
+                <a class="btn btn-outline-danger" style="margin: 5px;"  href="./medicine.html" >
                     Medicine
                 </a>
-                <a class="btn btn-outline-warning "  href="./testcenter.html" 
+                <a class="btn btn-outline-warning "style="margin: 5px;"   href="./testcenter.html" 
                     >
                     Test Centers
                 </a>
-                <a class="btn btn-outline-secondary " href="./foodresources.html" >
+                <a class="btn btn-outline-secondary " style="margin: 5px;" href="./foodresources.html" >
                     Food Resources
                 </a>
             </p>
         </div>
+        
 
 
 
@@ -66,15 +93,15 @@
         <div style="text-align:center;padding-bottom: 40px;;"  class="accordion-flush">
             <p>
 
-                <a class="btn btn-outline-warning"  href="./ambulace.html" 
+                <a class="btn btn-outline-warning"style="margin: -10px 10px 10px 10px;"   href="./ambulace.html" 
                     >
                     Ambulance
                 </a>
-                <a class="btn btn-outline-success"  href="./homenurse.html" 
+                <a class="btn btn-outline-success"style="margin: -10px 10px 10px 10px;"   href="./homenurse.html" 
                     >
                     Home Nurse
                 </a>
-                <a class="btn btn-outline-danger" href="./homeicu.html" >
+                <a class="btn btn-outline-danger" style="margin: -10px 10px 10px 10px;" href="./homeicu.html" >
                     Home ICU
                 </a>
                 
@@ -95,10 +122,15 @@
 
 
         <div class="text-center">
-            <button type="button" class="btn btn-dark" onClick="refreshPage()">Home</button>
-            <a type="button" class="btn btn-dark" href="./blog.html">Blog</a>
-            <a type="button" class="btn btn-dark" href="./volunteer.html">Our Volunteers</a>
-            <a type="button" class="btn btn-dark" href="#">Our Doctor Volunteers</a>
+            <button type="button"style="margin: 3px;"  class="btn btn-dark" onClick="refreshPage()">Home</button>
+            <a type="button" style="margin: 3px;" class="btn btn-dark" href="./blog.html">Blog</a>
+            <a type="button" style="margin: 3px;" class="btn btn-dark" href="./volunteer.html">Our Volunteers</a>
+            <a type="button" style="margin: 3px;" class="btn btn-dark" href="./team.html">Our Team</a>
+            <a type="button" style="margin: 3px;" class="btn btn-dark" href="./doc.html">Our Warriors</a>
+
+
+
+           
         </div>
 
 

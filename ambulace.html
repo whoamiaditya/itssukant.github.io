@@ -17,6 +17,32 @@
 
         }
     </style>
+    <style>
+        #loader {
+            border: 12px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #e65959;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .center {
+            position: relative;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 30px;
+            margin: auto;
+        }
+    </style>
+
 
 
     <title>seCUREME-Ambulance</title>
@@ -39,13 +65,17 @@
         
 
 
-        <div class="text-center">
-            <a type="button" class="btn btn-dark" href="./index.html">Home</a>
+<div class="text-center">
+    <button type="button"style="margin: 3px;"  class="btn btn-dark" href="./index.html">Home</button>
+    <a type="button" style="margin: 3px;" class="btn btn-dark" href="./blog.html">Blog</a>
+    <a type="button" style="margin: 3px;" class="btn btn-dark" href="./volunteer.html">Our Volunteers</a>
+    <a type="button" style="margin: 3px;" class="btn btn-dark" href="./team.html">Our Team</a>
+    <a type="button" style="margin: 3px;" class="btn btn-dark" href="./doc.html">Our Warriors</a>
 
-            <a type="button" class="btn btn-dark" href="./blog.html">Blog</a>
-            <a type="button" class="btn btn-dark" href="./volunteer.html">Our Volunteers</a>
-            <a type="button" class="btn btn-dark" href="./doctor.html">Our Doctor Volunteers</a>
-        </div>
+
+
+   
+</div>
 
 <div>
 <p>
@@ -53,16 +83,14 @@
 </p>
 </div>
 
-        <input type="text" name=" " id="myInput" placeholder="enter your state..." style="width:70%; margin-left:15%; margin-right:15%;" onkeyup="searchFun()">
+        <input type="text" name=" " id="myInput" placeholder="enter your state..." style="width:80%; margin-left:10%; margin-right:10%;" onkeyup="searchFun()">
         <div style="height: 20px;"></div>
  
         
  
  
- <div class="table-responsive">
-         <table class="table table-bordered  table-hover" style="text-align:center;font-family:tahoma;width:70%; 
-         margin-left:15%; 
-         margin-right:15%;" id="myTable">
+ <div class="table-responsive"style="width:80%; margin-left:10%; margin-right:10%;">
+         <table class="table table-bordered  table-hover" style="text-align:center;font-family:tahoma;" id="myTable">
              <thead>
                <th>sno</th>
                <th>Name</th>
@@ -75,6 +103,9 @@
        
              </thead>
              <tbody id="tbody1">
+                <th colspan=8 style="padding-left: 48%;">
+                    <p class="loader1" id="loader" class="center"style="align-items: center;"></p>
+                </th>
                 
              </tbody>
            </table>
@@ -84,7 +115,7 @@
       <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
        <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script> 
  <!-- TODO: Add SDKs for Firebase products that you want to use
-      https://firebase.google.com/docs/web/setup#available-libraries --> -->
+      https://firebase.google.com/docs/web/setup#available-libraries --> 
  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
  
  <script id="MainScript">
@@ -115,6 +146,7 @@ const firebaseConfig = {
      function SelectAllData(){
          firebase.database().ref('/1VqErzquDe2Zqb_mL3NUuJ48XvOWVS5ox0QKxZyN3N3Q').child("Sheet1").once('value',
          function(AllRecords){
+            document.getElementById("tbody1").innerHTML = "";
          AllRecords.forEach(
              function(CurrentRecord){
                  var NAME=CurrentRecord.val().NAME;

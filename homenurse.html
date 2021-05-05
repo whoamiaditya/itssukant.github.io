@@ -17,6 +17,32 @@
 
         }
     </style>
+    <style>
+        #loader {
+            border: 12px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #e65959;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .center {
+            position: relative;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 30px;
+            margin: auto;
+        }
+    </style>
+
 
 
     <title>seCUREME-Home Nurse</title>
@@ -40,11 +66,12 @@
 
 
         <div class="text-center">
-            <a type="button" class="btn btn-dark" href="./index.html">Home</a>
+            <a type="button" class="btn btn-dark"style="margin: 3px;" href="./index.html">Home</a>
 
-            <a type="button" class="btn btn-dark" href="./blog.html">Blog</a>
-            <a type="button" class="btn btn-dark" href="./volunteer.html">Our Volunteers</a>
-            <a type="button" class="btn btn-dark" href="./doctor.html">Our Doctor Volunteers</a>
+            <a type="button" class="btn btn-dark" style="margin: 3px;"href="./blog.html">Blog</a>
+            <a type="button" class="btn btn-dark" style="margin: 3px;"href="./volunteer.html">Our Volunteers</a>
+            <a type="button" style="margin: 3px;" class="btn btn-dark" href="./team.html">Our Team</a>
+            <a type="button" style="margin: 3px;" class="btn btn-dark" href="./doc.html">Our Warriors</a>
         </div>
 
 <div>
@@ -53,16 +80,14 @@
 </p>
 </div>
 
-        <input type="text" name=" " id="myInput" placeholder="enter your state..." style="width:70%; margin-left:15%; margin-right:15%;" onkeyup="searchFun()">
+        <input type="text" name=" " id="myInput" placeholder="enter your state..." style="width:80%; margin-left:10%; margin-right:10%;"onkeyup="searchFun()">
         <div style="height: 20px;"></div>
  
         
  
  
- <div class="table-responsive">
-         <table class="table table-bordered  table-hover" style="text-align:center;font-family:tahoma;width:70%; 
-         margin-left:15%; 
-         margin-right:15%;" id="myTable">
+ <div class="table-responsive"style="width:80%; margin-left:10%; margin-right:10%;">
+         <table class="table table-bordered  table-hover" style="text-align:center;font-family:tahoma" id="myTable">
              <thead>
                <th>sno</th>
                <th>Name of Provider</th>
@@ -71,10 +96,13 @@
                <th>Time of Verification</th>
                <th>Location</th>
                <th>Link</th>
-               <th>TNC or Prices</th>
+               <th>Prices</th>
        
              </thead>
              <tbody id="tbody1">
+                <th colspan=8 style="padding-left: 48%;">
+                    <p class="loader1" id="loader" class="center"style="align-items: center;"></p>
+                </th>
                 
              </tbody>
            </table>
@@ -84,7 +112,7 @@
       <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
        <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script> 
  <!-- TODO: Add SDKs for Firebase products that you want to use
-      https://firebase.google.com/docs/web/setup#available-libraries --> -->
+      https://firebase.google.com/docs/web/setup#available-libraries --> 
  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
  
  <script id="MainScript">
@@ -112,6 +140,7 @@
      function SelectAllData(){
          firebase.database().ref('/19FHj5cAC8vZ2Ov9OM2CwyljyKvT_-si1REbMqEWON3E').child("Sheet1").once('value',
          function(AllRecords){
+            document.getElementById("tbody1").innerHTML = "";
          AllRecords.forEach(
              function(CurrentRecord){
                  var LOCATION=CurrentRecord.val().LOCATION;
@@ -125,7 +154,7 @@
 
 
                  var Status=CurrentRecord.val().Status;
-                 AddItemsToTable(LOCATION,NAME,CONTACT_NUMBER,ADDITIONAL_INFO,T_N_C_or_Prices,LINK,Timestamp);
+                 AddItemsToTable(NAME,CONTACT_NUMBER,ADDITIONAL_INFO,Timestamp,LOCATION,LINK,T_N_C_or_Prices);
    
              }
          );});
@@ -136,7 +165,7 @@
    
    
      var stdno=0;
-     function AddItemsToTable(LOCATION,NAME,CONTACT_NUMBER,ADDITIONAL_INFO,T_N_C_or_Prices,LINK,Timestamp){
+     function AddItemsToTable(NAME,CONTACT_NUMBER,ADDITIONAL_INFO,Timestamp,LOCATION,LINK,T_N_C_or_Prices){
        var tbody=document.getElementById('tbody1');
        var trow=document.createElement('tr');
        var td1=document.createElement('td');
@@ -152,15 +181,15 @@
 
    
        td1.innerHTML=++stdno;
-       td2.innerHTML=LOCATION;
+       td2.innerHTML=NAME;
    
-       td3.innerHTML=NAME;
-       td4.innerHTML=CONTACT_NUMBER;
-       td5.innerHTML=ADDITIONAL_INFO;
+       td3.innerHTML=CONTACT_NUMBER;
+       td4.innerHTML=ADDITIONAL_INFO;
+       td5.innerHTML=Timestamp;
 
-       td6.innerHTML=T_N_C_or_Prices;
+       td6.innerHTML=LOCATION;
        td7.innerHTML=LINK;
-       td8.innerHTML=Timestamp;
+       td8.innerHTML=T_N_C_or_Prices;
 
    
        trow.appendChild(td1);
